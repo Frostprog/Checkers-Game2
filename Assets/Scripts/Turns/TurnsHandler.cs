@@ -17,6 +17,14 @@ public class TurnsHandler : NetworkBehaviour
 
     public event Action<string> OnGameOver;
     public event Action OnMovesGenerated;
+    [ClientRpc] void RpcGenerateMoves(PlayerPiecesHandler playerPieces)
+    {
+        if (NetworkServer.active)
+        {
+            return;
+        }
+        GenerateMoves(playerPieces.PiecesParent);
+    }
 
     #region Singleton
     public static TurnsHandler Instance { get; private set; }
@@ -97,4 +105,8 @@ public class TurnsHandler : NetworkBehaviour
             Moves = moves;
         OnMovesGenerated?.Invoke();
     }
+    //protected override void FillmovesList()
+   // {
+       // base.FillmovesList();
+   // }
 }
