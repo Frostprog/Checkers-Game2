@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TurnsHandler : NetworkBehaviour
 {
-    protected const string DRAW = "Ничья!";
-    protected const string WHITE_WIN = "Победитель: Светлый!";
-    protected const string BLACK_WIN = "Победитель: Тёмный!";
+    protected const string DRAW = "Draw!";
+    protected const string WHITE_WIN = "White Wins!";
+    protected const string BLACK_WIN = "Black Wins!";
 
     public bool WhiteTurn { get; protected set; }
     public List<Move> Moves { get; protected set; } = new List<Move>();
@@ -64,6 +64,13 @@ public class TurnsHandler : NetworkBehaviour
         GenerateMoves(piecesHandler.PiecesParent);
     }
 
+   /* protected override void FillMovesList()
+    {
+        base.FillMovesList();
+        RpcGenerateMoves(piecesHandler);
+
+    }*/
+
     void CheckVictory()
     {
         if (Moves.Count != 0) return;
@@ -105,8 +112,5 @@ public class TurnsHandler : NetworkBehaviour
             Moves = moves;
         OnMovesGenerated?.Invoke();
     }
-    //protected override void FillmovesList()
-   // {
-       // base.FillmovesList();
-   // }
+ 
 }

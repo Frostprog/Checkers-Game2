@@ -9,7 +9,11 @@ public class PlayerNetwork : Player
 {
     public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnLobbyOwnerStateUpdated;
-
+    [Command]
+    public void CmdNextTurn()
+    {
+        TurnsHandler.Instance.NextTurn();
+    }
     [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     string displayName;
     public string DisplayName
